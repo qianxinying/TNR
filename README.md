@@ -30,13 +30,46 @@ To further assess reasoning robustness, we propose a **Consistency Rate (CR)** m
 <p><em>Figure 1: Overview of the TNR benchmark. The dataset is constructed based on real-world temporal reasoning challenges and evaluated under a bidirectional framework.</em></p> 
 </div>
 
+## 🔄 Dataset Update
+
+**Last updated: 2026-08-25**
+
+We have updated the train, development, and test splits. Please use the JSON files in this directory as the current release.
+
 ## 📊 Data Quantity
 
 **📈 Dataset Statistics:**
 
-- **Total Size:** Approximately 94k QA–FV pairs  
+- **Total Size:** 93,980 QA–FV pairs  
 - **Splits:** Training, development, and test sets are constructed with an 8:1:1 ratio  
-- **Coverage:** 75,184 pairs for training and 9,895 pairs each for development and testing  
+- **Coverage:** 75,184 training pairs, 9,398 development pairs, and 9,398 test pairs
+
+
+
+## 🧾 Record Schema
+
+| Field | Type | Description |
+|---|---|---|
+| `id` | integer | Record ID. |
+| `question` | string | QA model input. |
+| `answer` | string, number, or array | QA target. |
+| `claim` | string | FV model input. |
+| `claim_answer` | boolean | FV target label. |
+| `qa_evidence` | array | QA supporting-evidence annotation; not model input. |
+| `qa_entity` | array of strings | Non-exhaustive QA retrieval metadata; not model input. |
+| `qa_relation` | array of strings | Non-exhaustive QA retrieval metadata; not model input. |
+| `qa_context` | string | QA model-input context containing evidence and noise facts. |
+| `fv_evidence` | array | FV supporting-evidence annotation; may be empty for false claims and is not model input. |
+| `fv_entity` | array of strings | Non-exhaustive FV retrieval metadata; not model input. |
+| `fv_relation` | array of strings | Non-exhaustive FV retrieval metadata; not model input. |
+| `fv_context` | string | FV model-input context containing evidence and noise facts. |
+| `level` | string | Difficulty level. |
+| `type` | string | Task type. |
+
+## 🎯 Evaluation Inputs
+
+For QA, provide the model with `question` and `qa_context`, and evaluate its output against `answer`. For FV, provide the model with `claim` and `fv_context`, and evaluate its output against `claim_answer`.
+
 
 ## 💪🏻 Evaluation Results
 
